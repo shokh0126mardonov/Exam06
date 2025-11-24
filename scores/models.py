@@ -21,4 +21,4 @@ class Score(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return 
+        return f"{self.pk}"

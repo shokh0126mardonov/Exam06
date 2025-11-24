@@ -7,7 +7,10 @@ from django.shortcuts import get_object_or_404
 from .models import Player
 
 class PlayerView(View):
-    def get(self,request:HttpRequest)->JsonResponse:
+    def get(self,request:HttpRequest,id = None)->JsonResponse:
+        if id is not None:
+            get_player = Player.objects.get(pk = id)
+            return JsonResponse(get_player.to_dict_score())
         country = request.GET.get('country')
         min_rating = request.GET.get('min_rating')
         search = request.GET.get('search')
@@ -29,10 +32,6 @@ class PlayerView(View):
                             "previous": "null",
                             "results":data
                         })
-    
-    def get(self,request:HttpRequest,id)->JsonResponse:
-        get_player = Player.objects.get(pk = id)
-        return JsonResponse(get_player.to_dict_score())
 
     def post(self,request:HttpRequest)->JsonResponse:
         data = json.loads(request.body.decode()) 

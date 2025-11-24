@@ -12,7 +12,7 @@ class Game(models.Model):
         ordering = ['-created_at']
 
     def __str__(self): 
-        return self.title
+        return f"{self.pk} {self.title}"
     
     def to_dict(self):
         return {
