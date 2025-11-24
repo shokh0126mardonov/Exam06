@@ -13,3 +13,13 @@ class Game(models.Model):
 
     def __str__(self): 
         return self.title
+    
+    def to_dict(self):
+        return {
+        'id':self.pk,
+        'title' : self.title,
+        'location': self.location,
+        'start_date' : self.start_date,
+        'description' : self.description,
+        'created_at' : self.created_at.strftime("%Y-%m-%d %H:%M:%S")
+        }

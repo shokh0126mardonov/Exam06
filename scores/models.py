@@ -1,6 +1,6 @@
 from django.db import models
-from ..games import Game
-from ..players import Player
+from games.models import Game
+from players.models import Player
 
 # Create your models here.
 
