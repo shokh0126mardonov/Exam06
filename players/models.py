@@ -8,7 +8,7 @@ class Player(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.nickname
+        return  f"{self.pk}"
       
     def to_dict(self):
         return {

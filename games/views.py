@@ -56,15 +56,10 @@ class GameView(View):
         })
     
     def delete(self,request:HttpRequest,id)->JsonResponse:
-        try:
-            get_game = Game.objects.get(id = id)
-            get_game.delete()
-            return JsonResponse(
-                {'games':'delete'}
-            )
-        except Game.DoesNotExist:
+        get_game = get_object_or_404(Game,pk = id)
+
+        if get_game.score:
             return JsonResponse({
-                "error": "Cannot delete game with existing scores. Tournament has active games."
-                },status = 404
-                )
-        
+                    "error": "Cannot delete game with existing scores. Tournament has active games."
+                    },status = 400)
+                            
