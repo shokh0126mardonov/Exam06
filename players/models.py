@@ -9,4 +9,30 @@ class Player(models.Model):
 
     def __str__(self):
         return self.nickname
-     
+      
+    def to_dict(self):
+        return {
+            "id": self.pk,
+            "nickname": self.nickname,
+            "country": self.country,
+            "rating": self.rating,
+            "created_at":self.created_at.strftime("%Y-%m-%d %H:%M:%S")
+        }
+    
+    def to_dict_score(self):
+        total_games = self.score.count()
+        wins = self.score.filter(result='win').count()
+        draws = self.score.filter(result='draw').count()
+        losses = self.score.filter(result='loss').count()
+
+        return {
+            "id": self.pk,
+            "nickname": self.nickname,
+            "country": self.country,
+            "rating": self.rating,
+            "created_at": self.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+            "total_games": total_games,
+            "wins": wins,
+            "draws": draws,
+            "losses": losses
+        }

@@ -39,7 +39,7 @@ class GameView(View):
         )
 
         new_game_data.save()
-        return JsonResponse(data=new_game_data.to_dict())
+        return JsonResponse(data=new_game_data.to_dict(),status = 201)
     
     def patch(self,request:HttpRequest,id)->JsonResponse:
         get_game = get_object_or_404(Game,pk=id)

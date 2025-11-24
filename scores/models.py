@@ -4,14 +4,14 @@ from players.models import Player
 
 # Create your models here.
 
-class Score(models.Model):
+class Score(models.Model): 
     CHOICES = [
         ['win','Win'],
         ['loss','Loss'],
         ['draw','Draw'],
     ]
-    game = models.ForeignKey(Game,on_delete=models.PROTECT)
-    player = models.ForeignKey(Player,on_delete=models.PROTECT)
+    game = models.ForeignKey(Game,on_delete=models.PROTECT,related_name='score')
+    player = models.ForeignKey(Player,on_delete=models.PROTECT,related_name='score')
     result = models.CharField(max_length=50,choices=CHOICES)
     points = models.IntegerField()
     opponent_name = models.CharField(max_length=50,blank=True,null=True)
